@@ -1,9 +1,9 @@
-// src/components/Layout.tsx
+// src/components/DarkModeContainer.tsx
 'use client'
 import React, { useState, useEffect } from 'react';
 import DarkModeToggle from '@/components/DarkModeToggle';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const DarkModeContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [darkMode, setDarkMode] = useState(false);
 
 	useEffect(() => {
@@ -25,8 +25,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	};
 
 	return (
-		<div className="container mx-auto p-4">
-			<div className="absolute top-4 right-4">
+		<div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 relative">
+			<div className="absolute top-4 right-4 z-20">
 				<DarkModeToggle toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
 			</div>
 			{children}
@@ -34,4 +34,4 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	);
 };
 
-export default Layout;
+export default DarkModeContainer;

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Layout from "@/components/Layout";
+import DarkModeContainer from "@/components/DarkModeContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 		<body className={inter.className}>
-		<Layout>{children}</Layout>
+		<DarkModeContainer>
+			{children}
+		</DarkModeContainer>
 		</body>
 		</html>
 	);
