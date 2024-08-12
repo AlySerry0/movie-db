@@ -1,4 +1,3 @@
-// src/components/MovieDetails.tsx
 'use client'
 import React from 'react';
 import { useParams } from 'next/navigation';
@@ -14,8 +13,15 @@ const MovieDetails: React.FC = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <div className="h-auto w-full md:w-3/4 flex flex-col justify-center items-center overflow-hidden shadow-2xl border border-gray-300 rounded-lg bg-white dark:bg-gray-800">
+    <div className="h-screen w-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900 relative">
+      <Image
+        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+        alt={`${movie.title} backdrop`}
+        layout="fill"
+        objectFit="cover"
+        className="absolute inset-0 z-0 opacity-50"
+      />
+      <div className="relative z-10 w-full md:w-3/4 flex flex-col justify-center items-center overflow-hidden shadow-2xl border border-gray-300 rounded-lg bg-white dark:bg-gray-800 p-6">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{movie.title}</h1>
         <div className="flex flex-col md:flex-row items-center max-h-full">
           <div className="w-full md:w-1/3 flex justify-center items-center max-h-full">
