@@ -82,6 +82,7 @@ const MovieGrid: React.FC<MovieGridProps> = () => {
     <div className="pt-4">
       <div className="flex justify-center mb-4">
         <input
+          id="search-input"
           type="text"
           placeholder="Search movies..."
           value={searchQuery}
@@ -96,6 +97,7 @@ const MovieGrid: React.FC<MovieGridProps> = () => {
       </div>
       <div className="flex justify-center mt-4 items-center">
         <button
+          id="previous-page-button"
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
           className="px-4 py-2 mx-2 bg-gray-300 dark:bg-gray-700 rounded-full disabled:opacity-50 flex items-center justify-center"
@@ -103,6 +105,7 @@ const MovieGrid: React.FC<MovieGridProps> = () => {
           <FaArrowLeft className="text-gray-900 dark:text-white" />
         </button>
         <input
+          id="page-input"
           type="number"
           value={currentPage}
           onChange={handlePageInputChange}
@@ -110,6 +113,7 @@ const MovieGrid: React.FC<MovieGridProps> = () => {
           min="1"
         />
         <button
+          id="next-page-button"
           onClick={handleNextPage}
           className="px-4 py-2 mx-2 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center"
         >
