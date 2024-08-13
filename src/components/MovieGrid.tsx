@@ -1,16 +1,13 @@
 // src/components/MovieGrid.tsx
 'use client'
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Movie} from '@/types/Movie';
 import MovieCard from './MovieCard';
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 import {fetchMovies} from '@/app/api/fetchMovies';
 import {searchMovies} from '@/app/api/searchMovies';
 
-interface MovieGridProps {
-}
-
-const MovieGrid: React.FC<MovieGridProps> = () => {
+const MovieGrid = () => {
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [searchQuery, setSearchQuery] = useState('');
