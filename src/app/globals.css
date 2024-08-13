@@ -17,19 +17,22 @@ body {
 .movie-details {
 	transition: all 0.5s ease;
 }
+
 body.dark-mode {
 	background-color: #121212;
 	color: #ffffff;
 }
+
 .no-arrows::-webkit-outer-spin-button,
 .no-arrows::-webkit-inner-spin-button {
-  @apply appearance-none;
-  margin: 0;
+	@apply appearance-none;
+	margin: 0;
 }
 
 .no-arrows {
-  @apply appearance-none;
+	@apply appearance-none;
 }
+
 .no-arrows {
 	-moz-appearance: textfield;
 }
