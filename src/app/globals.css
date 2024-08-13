@@ -21,3 +21,15 @@ body.dark-mode {
 	background-color: #121212;
 	color: #ffffff;
 }
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  @apply appearance-none;
+  margin: 0;
+}
+
+.no-arrows {
+  @apply appearance-none;
+}
+.no-arrows {
+	-moz-appearance: textfield;
+}

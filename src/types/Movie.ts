@@ -9,4 +9,5 @@ export interface Movie {
   backdrop_path: string;
   vote_average: number;
   vote_count: number;
+  adult: boolean;
 }

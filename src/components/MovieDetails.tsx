@@ -1,23 +1,28 @@
+// src/components/MovieDetails.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { movies } from '@/data/movies';
-import { genres } from '@/data/genres';
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
+import { fetchMovieDetails } from '@/app/api/fetchMovieDetails';
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams();
   const router = useRouter();
-  const movie = movies.find((movie) => movie.id === Number(id));
+  const [movie, setMovie] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const getMovieDetails = async () => {
+      const fetchedMovie = await fetchMovieDetails(Number(id));
+      setMovie(fetchedMovie);
+    };
+    getMovieDetails();
     setIsVisible(true);
-  }, []);
+  }, [id]);
 
   if (!movie) {
-    return <div>Movie not found</div>;
+    return <div>Loading...</div>;
   }
 
   const handleBackClick = () => {
@@ -27,10 +32,7 @@ const MovieDetails: React.FC = () => {
     }, 500); // Duration of the fade-out effect
   };
 
-  const movieGenres = movie.genre_ids.map((genreId) => {
-    const genre = genres.find((g) => g.id === genreId);
-    return genre ? genre.name : '';
-  }).filter(Boolean).join(', ');
+  const movieGenres = movie.genres.map((genre: { id: number, name: string }) => genre.name).join(', ');
 
   return (
     <div className={`h-screen w-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900 relative overflow-hidden transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
