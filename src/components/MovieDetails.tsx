@@ -1,7 +1,7 @@
 // src/components/MovieDetails.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
 import { fetchMovieDetails } from '@/app/api/fetchMovieDetails';
@@ -9,8 +9,10 @@ import { fetchMovieDetails } from '@/app/api/fetchMovieDetails';
 const MovieDetails: React.FC = () => {
   const { id } = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [movie, setMovie] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const page = searchParams.get('page') || '1';
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -28,7 +30,7 @@ const MovieDetails: React.FC = () => {
   const handleBackClick = () => {
     setIsVisible(false);
     setTimeout(() => {
-      router.back();
+      router.push(`/?page=${page}`);
     }, 500); // Duration of the fade-out effect
   };
 

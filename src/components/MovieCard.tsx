@@ -2,9 +2,9 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Movie } from '@/types/Movie';
-import { FaExclamationCircle } from 'react-icons/fa'; // Import the 18+ icon
+import { FaExclamationCircle } from 'react-icons/fa';
 
 type MovieCardProps = {
   movie: Movie;
@@ -12,9 +12,11 @@ type MovieCardProps = {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get('page') || '1';
 
   const handleClick = () => {
-    router.push(`/movies/${movie.id}`);
+    router.push(`/movies/${movie.id}?page=${currentPage}`);
   };
 
   return (
