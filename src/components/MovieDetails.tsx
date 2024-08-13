@@ -5,12 +5,13 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
 import { fetchMovieDetails } from '@/app/api/fetchMovieDetails';
+import { MovieDetails } from '@/types/MovieDetails';
 
-const MovieDetails: React.FC = () => {
+const MovieDetailsComponent: React.FC = () => {
   const { id } = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [movie, setMovie] = useState<any>(null);
+  const [movie, setMovie] = useState<MovieDetails | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const page = searchParams.get('page') || '1';
 
@@ -34,7 +35,9 @@ const MovieDetails: React.FC = () => {
     }, 500); // Duration of the fade-out effect
   };
 
-  const movieGenres = movie.genres.map((genre: { id: number, name: string }) => genre.name).join(', ');
+  const movieGenres = movie.genres ? movie.genres.map((genre) => genre.name).join(', ') : 'N/A';
+  const productionCompanies = movie.productionCompanies ? movie.productionCompanies.map((company) => company.name).join(', ') : 'N/A';
+  const spokenLanguages = movie.spokenLanguages ? movie.spokenLanguages.map((language) => language.englishName).join(', ') : 'N/A';
 
   return (
     <div
@@ -42,7 +45,7 @@ const MovieDetails: React.FC = () => {
       className={`h-screen w-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900 relative overflow-hidden transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
       <Image
-        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/original${movie.backdropPath}`}
         alt={`${movie.title} backdrop`}
         layout="fill"
         objectFit="cover"
@@ -65,7 +68,7 @@ const MovieDetails: React.FC = () => {
             <div className="flex items-center justify-center h-full">
               <Image
                 id="movie-poster"
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
                 alt={movie.title}
                 width={333}
                 height={500}
@@ -78,13 +81,28 @@ const MovieDetails: React.FC = () => {
               <strong>Overview:</strong> {movie.overview}
             </p>
             <p id="movie-release-date" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
-              <strong>Release Date:</strong> {movie.release_date}
+              <strong>Release Date:</strong> {movie.releaseDate}
             </p>
             <p id="movie-rating" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
-              <strong>Rating:</strong> {movie.vote_average}
+              <strong>Rating:</strong> {movie.voteAverage}
             </p>
             <p id="movie-genres" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
               <strong>Genres:</strong> {movieGenres}
+            </p>
+            <p id="movie-budget" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
+              <strong>Budget:</strong> ${movie.budget.toLocaleString()}
+            </p>
+            <p id="movie-revenue" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
+              <strong>Revenue:</strong> ${movie.revenue.toLocaleString()}
+            </p>
+            <p id="movie-runtime" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
+              <strong>Runtime:</strong> {movie.runtime} minutes
+            </p>
+            <p id="movie-production-companies" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
+              <strong>Production Companies:</strong> {productionCompanies}
+            </p>
+            <p id="movie-spoken-languages" className="text-lg mb-2 text-gray-700 dark:text-gray-300">
+              <strong>Spoken Languages:</strong> {spokenLanguages}
             </p>
           </div>
         </div>
@@ -93,4 +111,4 @@ const MovieDetails: React.FC = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieDetailsComponent;

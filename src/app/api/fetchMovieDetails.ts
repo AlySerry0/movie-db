@@ -4,10 +4,10 @@ export const fetchMovieDetails = async (id: number) => {
 		method: 'GET',
 		headers: {
 			accept: 'application/json',
-			Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
 		}
 	};
 
-	const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options);
+	const response = await fetch(`http://movieland.runasp.net/api/Movies/Details/${id}`, options);
+	console.log(response);
 	return await response.json();
 };
