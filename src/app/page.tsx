@@ -1,9 +1,13 @@
 // src/app/page.tsx
-import React from 'react';
+import React, { Suspense } from 'react';
 import MovieGrid from '@/components/MovieGrid';
 
-export default function Home() {
-	return (
-		<MovieGrid/>
-	);
-}
+const HomePage: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MovieGrid />
+    </Suspense>
+  );
+};
+
+export default HomePage;
