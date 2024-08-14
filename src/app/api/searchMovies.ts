@@ -7,7 +7,7 @@ export const searchMovies = async (query: string) => {
 		}
 	};
 
-	const response = await fetch(`http://movieland.runasp.net/api/Movies/search?query=${encodeURIComponent(query)}`, options);
+	const response = await fetch(`http://localhost:5000/api/Movies/search?query=${encodeURIComponent(query)}`, options);
 	const data = await response.json();
 	return data.results;
 };

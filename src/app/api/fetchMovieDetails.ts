@@ -7,7 +7,7 @@ export const fetchMovieDetails = async (id: number) => {
 		}
 	};
 
-	const response = await fetch(`http://movieland.runasp.net/api/Movies/Details/${id}`, options);
+	const response = await fetch(`http://localhost:5000/api/Movies/Details/${id}`, options);
 	console.log(response);
 	return await response.json();
 };
